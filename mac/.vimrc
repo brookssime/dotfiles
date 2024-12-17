@@ -1,7 +1,7 @@
 set nocompatible 
 filetype off    
 
-set number      "show line numbers
+set relativenumber      "show line numbers
 set backspace=indent,eol,start  "Allow backspace in insert mode
 set history=1000
 set autoread     "Reload files changed outside vim
@@ -14,13 +14,20 @@ set wildmode=list:longest
 
 set hidden "Vim needs this to manage multiple buffers effectively
 
+" clipboard options
+set clipboard=unnamed
+
 "turn on syntax highlighting
 syntax on
 
 
 let mapleader = ","
 
+" Shortcut to rapidly toggle `set list`
+nmap <leader>l :set list!<CR>
 
+" Use the same symbols as TextMate for tabstops and EOLs
+set listchars=tab:▸\ ,eol:¬
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -35,6 +42,7 @@ Plugin 'valloric/youcompleteme'
 Plugin 'vim-airline/vim-airline'
 Plugin 'eliba2/vim-node-inspect'
 Plugin 'xuyuanp/nerdtree-git-plugin'
+Plugin 'aacunningham/vim-fuzzy-stash'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -59,3 +67,4 @@ nnoremap <Leader>f :NERDTreeToggle<Enter>
 nnoremap <F4> :NERDTreeClose<CR>
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
+nnoremap d "_d
