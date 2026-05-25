@@ -1,4 +1,3 @@
--- if true then return {} end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
 
 -- AstroCore provides a central place to modify mappings, vim options, autocommands, and more!
 -- Configuration documentation can be found with `:h astrocore`
@@ -73,27 +72,26 @@ return {
           desc = "Close buffer from tabline",
         },
 
-        ["K"] = { "5k", desc = "Move up 5 lines" },
-        ["J"] = { "5j", desc = "Move down 5 lines" },
-        ["<Up>"] = { "<Nop>", desc = "Disable arrow" },
-        ["<Down>"] = { "<Nop>", desc = "Disable arrow" },
-        ["<Right>"] = { "<Nop>", desc = "Disable arrow" },
-        ["<Left>"] = { "<Nop>", desc = "Disable arrow" },
-
-
         -- tables with just a `desc` key will be registered with which-key if it's installed
         -- this is useful for naming menus
         -- ["<Leader>b"] = { desc = "Buffers" },
 
         -- setting a mapping to false will disable it
         -- ["<C-S>"] = false,
+        
+        ["K"] = { "5k", desc = "Move up 5 lines" },
+        ["J"] = { "5j", desc = "Move down 5 lines" },
+        ["<Up>"] = { "<Nop>", desc = "Disable arrow" },
+        ["<Down>"] = { "<Nop>", desc = "Disable arrow" },
+        ["<Right>"] = { "<Nop>", desc = "Disable arrow" },
+        ["<Left>"] = { "<Nop>", desc = "Disable arrow" }, 
       },
       i = {
         ["<Up>"] = { "<Nop>", desc = "Disable arrow" },
         ["<Down>"] = { "<Nop>", desc = "Disable arrow" },
         ["<Right>"] = { "<Nop>", desc = "Disable arrow" },
         ["<Left>"] = { "<Nop>", desc = "Disable arrow" },
-      }
+      },
     },
   },
 }
