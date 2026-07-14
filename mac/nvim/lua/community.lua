@@ -10,7 +10,6 @@ return {
   { import = "astrocommunity.pack.python.base" },
   { import = "astrocommunity.pack.python.basedpyright" },
   { import = "astrocommunity.pack.python.ruff" },
-  { import = "astrocommunity.pack.typescript" },
   { import = "astrocommunity.pack.biome" },
   { import = "astrocommunity.pack.markdown" },
 }
