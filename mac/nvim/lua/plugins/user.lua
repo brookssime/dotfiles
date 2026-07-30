@@ -104,4 +104,62 @@ return {
     --     })
     -- end
   },
+
+  {
+    "mfussenegger/nvim-dap",
+    config = function()
+      local dap = require "dap"
+
+      dap.adapters["pwa-node"] = {
+        type = "server",
+        host = "127.0.0.1",
+        port = "${port}",
+        executable = {
+          command = "node",
+          args = {
+            -- NOTE that we don't need to hardcode the path, but can instead use the location from the Mason-installed version via `:MasonInstall js-debug-adapter`
+            vim.fn.stdpath "data" .. "/mason/packages/js-debug-adapter/js-debug/src/dapDebugServer.js",
+            -- NOTE that there's an issue with nvim-dap calling this if you DO NOT specify a port and the host as `127.0.0.1`
+            "${port}",
+            "127.0.0.1",
+          },
+        },
+      }
+
+      for _, language in ipairs { "typescript", "javascript" } do
+        dap.configurations[language] = {
+          -- at a minimum, it's nice to be able to interactively pick the process
+          {
+            type = "pwa-node",
+            request = "attach",
+            name = "Attach",
+            processId = require("dap.utils").pick_process,
+            cwd = "${workspaceFolder}",
+          },
+          -- ...
+        }
+      end
+    end,
+  },
+
+  {
+    "akinsho/toggleterm.nvim",
+    opts = {
+      direction = "vertical",
+      size = function(term)
+        if term.direction == "horizontal" then
+          return 15
+        elseif term.direction == "vertical" then
+          return vim.o.columns * 0.4
+        end
+      end,
+    },
+  },
+
+  {
+    "folke/which-key.nvim",
+    opts = {
+      preset = "classic",
+    },
+  },
 }

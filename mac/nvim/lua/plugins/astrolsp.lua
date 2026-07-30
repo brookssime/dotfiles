@@ -11,7 +11,7 @@ return {
     -- Configuration table of features provided by AstroLSP
     features = {
       codelens = true, -- enable/disable codelens refresh on start
-      inlay_hints = false, -- enable/disable inlay hints on start
+      inlay_hints = true, -- enable/disable inlay hints on start
       semantic_tokens = true, -- enable/disable semantic token highlighting
     },
     -- customize lsp formatting options
@@ -29,8 +29,6 @@ return {
       disabled = { -- disable formatting capabilities for the listed language servers
         -- disable lua_ls formatting capability if you want to use StyLua to format your lua code
         -- "lua_ls",
-        -- Use biome (via none-ls) as the sole JS/TS formatter. Without this, vtsls
-        -- ALSO formats on save and the overlapping edits eat trailing brackets.
         "vtsls",
       },
       timeout_ms = 1000, -- default format timeout
@@ -46,6 +44,31 @@ return {
     -- client specific configuration can also go in `lsp/` in your configuration root (see `:h lsp-config`)
     config = {
       -- ["*"] = { capabilities = {} }, -- modify default LSP client settings such as capabilities
+      vtsls = {
+        settings = {
+          -- enable all inlay hints for both TypeScript and JavaScript
+          typescript = {
+            inlayHints = {
+              parameterNames = { enabled = "all", suppressWhenArgumentMatchesName = true },
+              parameterTypes = { enabled = true },
+              variableTypes = { enabled = true, suppressWhenTypeMatchesName = true },
+              propertyDeclarationTypes = { enabled = true },
+              functionLikeReturnTypes = { enabled = true },
+              enumMemberValues = { enabled = true },
+            },
+          },
+          javascript = {
+            inlayHints = {
+              parameterNames = { enabled = "all", suppressWhenArgumentMatchesName = true },
+              parameterTypes = { enabled = true },
+              variableTypes = { enabled = true, suppressWhenTypeMatchesName = true },
+              propertyDeclarationTypes = { enabled = true },
+              functionLikeReturnTypes = { enabled = true },
+              enumMemberValues = { enabled = true },
+            },
+          },
+        },
+      },
     },
     -- customize how language servers are attached
     handlers = {
