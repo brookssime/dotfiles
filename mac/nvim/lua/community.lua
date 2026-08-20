@@ -12,4 +12,5 @@ return {
   { import = "astrocommunity.pack.python.ruff" },
   { import = "astrocommunity.pack.markdown" },
   { import = "astrocommunity.editing-support.conform-nvim" },
+  { import = "astrocommunity.lsp.nvim-lint" },
 }
