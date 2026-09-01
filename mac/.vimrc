@@ -16,11 +16,14 @@ set clipboard=unnamed
 
 set hidden "Vim needs this to manage multiple buffers effectively
 
+set hlsearch
+set incsearch
+
 "turn on syntax highlighting
 syntax on
 
 
-let mapleader = ","
+let mapleader="\<Space>"
 
 
 
@@ -61,4 +64,3 @@ nnoremap <F2> :NERDTree<CR>
 nnoremap <Leader>f :NERDTreeToggle<Enter>
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
-imap jj <Esc>

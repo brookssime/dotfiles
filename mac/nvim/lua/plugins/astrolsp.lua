@@ -109,6 +109,11 @@ return {
           desc = "Declaration of current symbol",
           cond = "textDocument/declaration",
         },
+        grr = {
+          function() require("snacks").picker.lsp_references { layout = "telescope" } end,
+          desc = "References (preview)",
+          cond = "textDocument/references",
+        },
         ["<Leader>uY"] = {
           function() require("astrolsp.toggles").buffer_semantic_tokens() end,
           desc = "Toggle LSP semantic highlight (buffer)",
