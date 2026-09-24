@@ -1,7 +1,3 @@
--- You can also add or configure plugins by creating files in this `plugins/` folder
--- PLEASE REMOVE THE EXAMPLES YOU HAVE NO INTEREST IN BEFORE ENABLING THIS FILE
--- Here are some examples:
-
 ---@type LazySpec
 return {
   {
@@ -131,10 +127,16 @@ return {
 
   {
     "lewis6991/gitsigns.nvim",
-    opts = {},
+    opts = {
+      current_line_blame = true,
+    },
   },
 
   {
     "tpope/vim-fugitive",
+  },
+
+  {
+    "tpope/vim-rhubarb",
   },
 }

@@ -79,12 +79,24 @@ return {
         -- setting a mapping to false will disable it
         -- ["<C-S>"] = false,
 
+        -- block comments: `gb{motion}` wraps a range, `gbc` converts the run of
+        -- `//` comments under the cursor (see `lua/blockcomment.lua`)
+        ["gb"] = { function() return require("blockcomment").operator() end, expr = true, desc = "Block comment" },
+        ["gbc"] = { function() require("blockcomment").current_line() end, desc = "Block comment line/run" },
+
         ["K"] = { "5k", desc = "Move up 5 lines" },
         ["J"] = { "5j", desc = "Move down 5 lines" },
         ["<Up>"] = { "<Nop>", desc = "Disable arrow" },
         ["<Down>"] = { "<Nop>", desc = "Disable arrow" },
         ["<Right>"] = { "<Nop>", desc = "Disable arrow" },
         ["<Left>"] = { "<Nop>", desc = "Disable arrow" },
+      },
+      x = {
+        ["gb"] = { function() return require("blockcomment").operator() end, expr = true, desc = "Block comment" },
+
+        -- NOTE: this shadows visual-mode `J` (join lines); use `gJ` or `:join` instead
+        ["K"] = { "5k", desc = "Move up 5 lines" },
+        ["J"] = { "5j", desc = "Move down 5 lines" },
       },
       i = {
         ["<Up>"] = { "<Nop>", desc = "Disable arrow" },

@@ -48,6 +48,13 @@ return {
         settings = {
           -- enable all inlay hints for both TypeScript and JavaScript
           typescript = {
+            tsserver = {
+              -- vtsls defaults tsserver to a 3072MB V8 heap. shef-mono loads each yarn
+              -- workspace as a separate project in the same tsserver process (~1.5GB for
+              -- shef-web alone), so opening files across 3-4 workspaces blows the cap and
+              -- V8 aborts -> "The JS/TS language service crashed 5 times in the last 5 Minutes".
+              maxTsServerMemory = 8192,
+            },
             inlayHints = {
               parameterNames = { enabled = "all", suppressWhenArgumentMatchesName = true },
               parameterTypes = { enabled = true },
