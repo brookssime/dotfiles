@@ -17,7 +17,13 @@ set wildmode=list:longest
 set hlsearch
 set incsearch
 
-set clipboard=unnamed
+" macOS has one system clipboard (*); on Linux, + is the Ctrl+C/Ctrl+V one
+" and * is the middle-click selection
+if has('unnamedplus')
+  set clipboard=unnamedplus
+else
+  set clipboard=unnamed
+endif
 
 let mapleader="\<Space>"
 
