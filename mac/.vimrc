@@ -1,66 +1,76 @@
-set nocompatible 
-filetype off    
+set nocompatible
+filetype plugin indent on
+syntax on
 
-set relativenumber      "show line numbers
+set number
+set relativenumber
 set backspace=indent,eol,start  "Allow backspace in insert mode
-set history=1000
-set autoread     "Reload files changed outside vim
+set history=10000
+set autoread                    "Reload files changed outside vim
+set hidden                      "Vim needs this to manage multiple buffers effectively
 
 " Wildmenu and wildmode makes file completion behave like in the shell,
 " autocomplete to the point of ambiguity and show other options
 set wildmenu
 set wildmode=list:longest
 
-" Clipboard
-set clipboard=unnamed
-
-set hidden "Vim needs this to manage multiple buffers effectively
-
 set hlsearch
 set incsearch
 
-"turn on syntax highlighting
-syntax on
-
+set clipboard=unnamed
 
 let mapleader="\<Space>"
 
+let g:netrw_liststyle = 3
+let g:netrw_banner = 0
+let g:netrw_winsize = 25
+let g:netrw_browse_split = 4
 
+nnoremap <F2> :Lexplore<CR>
+nnoremap <Leader>f :Lexplore<CR>
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'preservim/nerdtree'
-Plugin 'tpope/vim-surround'
-Plugin 'w0rp/ale'
-Plugin 'valloric/youcompleteme'
-Plugin 'vim-airline/vim-airline'
-Plugin 'eliba2/vim-node-inspect'
-Plugin 'xuyuanp/nerdtree-git-plugin'
-
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
-let g:airline_powerline_fonts=1
-let g:airline#extensions#tabline#enabled = 1
-let NERDTreeQuitOnOpen = 1
-
-" Remapping
-nnoremap <F2> :NERDTree<CR>
-nnoremap <Leader>f :NERDTreeToggle<Enter>
 autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
+autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | Explore | endif
+
+" --- Ported from the Neovim config (lua/plugins/astrocore.lua) ---
+" Copied once, deliberately not kept in sync. Edit either side freely.
+
+" Buffer navigation
+nnoremap ]b :bnext<CR>
+nnoremap [b :bprevious<CR>
+nnoremap <Leader>bd :bdelete<CR>
+
+" Move 5 lines at a time. In visual mode this shadows J (join); use gJ or :join
+nnoremap K 5k
+nnoremap J 5j
+xnoremap K 5k
+xnoremap J 5j
+
+" No arrow keys
+nnoremap <Up> <Nop>
+nnoremap <Down> <Nop>
+nnoremap <Right> <Nop>
+nnoremap <Left> <Nop>
+inoremap <Up> <Nop>
+inoremap <Down> <Nop>
+inoremap <Right> <Nop>
+inoremap <Left> <Nop>
+
+" Black-hole deletes so they never clobber the unnamed register. <Leader>D
+" re-exposes the real cutting operator (<Leader>Dd cuts a line, because the
+" second d lands in operator-pending mode, which these maps don't touch)
+nnoremap d "_d
+nnoremap D "_D
+nnoremap x "_x
+nnoremap X "_X
+nnoremap c "_c
+nnoremap C "_C
+nnoremap <Leader>D d
+
+xnoremap d "_d
+xnoremap x "_x
+xnoremap c "_c
+xnoremap <Leader>D d
+
+" Paste over a selection without swallowing the register
+xnoremap p P
