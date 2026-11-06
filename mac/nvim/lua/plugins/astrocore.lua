@@ -90,6 +90,33 @@ return {
         ["<Down>"] = { "<Nop>", desc = "Disable arrow" },
         ["<Right>"] = { "<Nop>", desc = "Disable arrow" },
         ["<Left>"] = { "<Nop>", desc = "Disable arrow" },
+
+        --[[ black-hole deletes so they never clobber the unnamed register;
+             `<Leader>D` re-exposes the real cutting operator (`<Leader>Dd`
+             cuts a line -- the second `d` lands in operator-pending mode,
+             which these normal-mode maps don't touch) ]]
+        ["d"] = { '"_d', desc = "Delete (black hole)" },
+        ["D"] = { '"_D', desc = "Delete to EOL (black hole)" },
+        ["x"] = { '"_x', desc = "Delete char (black hole)" },
+        ["X"] = { '"_X', desc = "Backspace char (black hole)" },
+        ["c"] = { '"_c', desc = "Change (black hole)" },
+        ["C"] = { '"_C', desc = "Change to EOL (black hole)" },
+        ["<Leader>D"] = { "d", desc = "Delete and cut" },
+
+        -- spectre
+        ["<Leader>F"] = {
+          function() require("spectre").toggle() end,
+          desc = "Toggle Spectre",
+        },
+
+        ["<Leader>sw"] = {
+          function() require("spectre").open_visual { select_word = true } end,
+          desc = "Search current word",
+        },
+        ["<Leader>sp"] = {
+          function() require("spectre").open_file_search { select_word = true } end,
+          desc = "Search on current file",
+        },
       },
       x = {
         ["gb"] = { function() return require("blockcomment").operator() end, expr = true, desc = "Block comment" },
@@ -97,6 +124,21 @@ return {
         -- NOTE: this shadows visual-mode `J` (join lines); use `gJ` or `:join` instead
         ["K"] = { "5k", desc = "Move up 5 lines" },
         ["J"] = { "5j", desc = "Move down 5 lines" },
+
+        ["d"] = { '"_d', desc = "Delete (black hole)" },
+        ["x"] = { '"_x', desc = "Delete (black hole)" },
+        ["c"] = { '"_c', desc = "Change (black hole)" },
+        --[[ `<Leader>d` is AstroNvim's Debugger group in visual mode, so the
+             cut operator lives on `<Leader>D` here too ]]
+        ["<Leader>D"] = { "d", desc = "Delete and cut" },
+
+        --[[ paste over a selection without swallowing the register ]]
+        ["p"] = { "P", desc = "Paste (keep register)" },
+        -- spectre
+        ["<Leader>sw"] = {
+          function() require("spectre").open_visual() end,
+          desc = "Search current word",
+        },
       },
       i = {
         ["<Up>"] = { "<Nop>", desc = "Disable arrow" },
